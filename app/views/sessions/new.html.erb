@@ -1,0 +1,10 @@
+<h1>Login</h1>
+
+<%= form_tag '/login' do %>
+  <ul>
+    <li><%= label_tag :email %> <%= text_field_tag :email %></li>
+    <li><%= label_tag :password %> <%= password_field_tag :password %></li>
+    <li><%= submit_tag "Submit" %></li>
+    <li><%= link_to "Signup", '/signup' %></li>
+  </ul>
+<% end %>

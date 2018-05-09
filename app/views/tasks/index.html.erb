@@ -1,0 +1,19 @@
+<h1>Tasks</h1>
+
+<%= form_tag("/create", method: "post") do %>
+  <%= hidden_field_tag('task[user_id]', current_user.id) %>
+  <%= text_field_tag('task[task]') %>
+  <%= submit_tag("Add task") %>
+<% end %>
+
+<hr>
+
+<% if @tasks.count > 0 %>
+  <ul class="tasks">
+    <% @tasks.each do |task| %>
+    <li class="task"><%= link_to task.task, task %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You don't have tasks yet. Try creating a new one.</p>
+<% end %>
