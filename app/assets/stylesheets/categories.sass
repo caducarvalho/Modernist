@@ -1,0 +1,367 @@
+/* ZERO-STATE SCREEN */
+.container-zero-state
+  width: 300px
+  margin: 0 auto
+  color: $gray-dk
+
+  h1
+    font-weight: 700
+    font-size: 2.4em
+    text-align: center
+    margin-bottom: 20px
+    color: $gray-bg
+
+  p
+    margin-bottom: 10px
+
+.add-first-category
+  ul
+    font-size: 0
+    margin: 15px 0
+
+  li
+    display: inline-block
+    width: 30%
+    margin: 0 5% 6px 0
+    vertical-align: top
+    position: relative
+
+    &:nth-child(3n)
+      margin-right: 0
+
+  label
+    font-size: 14px
+    height: 70px
+    line-height: 16px
+    padding: 10px
+    display: block
+    color: $color-fg
+    background: none
+    border: none
+    cursor: pointer
+    font-family: "Work Sans", Helvetica, Arial, sans-serif
+    font-size: 12px
+    border-radius: 4px
+    text-align: center
+    vertical-align: middle
+
+    &:hover
+      background: $gray-fg
+      color: $color-bg
+
+    i
+      display: block
+      margin: 5px 0 2px
+      font-size: 32px
+
+  input[type="radio"]
+    position: absolute
+    top: 0
+    left: 0
+    width: 0
+    height: 0
+    visibility: hidden
+    opacity: 0
+
+    &:checked + label
+      padding: 8px
+      border: 2px solid $color-fg
+      background: white
+
+  input[type="submit"]
+    width: 100%
+    height: 50px
+    font-size: 1em
+    padding: 0 15px
+    background: $color-fg
+    color: white
+    font-family: "Work Sans", Helvetica, Arial, sans-serif
+    border: none
+    cursor: pointer
+    overflow: hidden
+    display: block
+    text-overflow: ellipsis
+    white-space: nowrap
+    border-radius: 25px
+    -webkit-appearance: none
+
+    &:hover, &:active
+      background: $color-bg
+
+    &:disabled
+      background: $gray-bg
+
+/* CATEGORY SIDE BAR */
+.categories,
+.overdue-tasks,
+.today-tasks
+  font-size: 0.8em
+  margin-bottom: 10px
+
+  li
+    border-radius: 2px
+
+    &:hover
+      background: $gray-fg
+
+  .category-count
+    float: right
+    margin: 3px 10px 3px 4px
+    background: $gray-bg
+    color: white
+    padding: 3px 5px
+    border-radius: 4px
+    text-shadow: 0 -1px 0 #AAA
+    font-size: 0.9em
+
+  a
+    display: block
+    padding: 6px 10px
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+  .days-overdue-count
+    float: right
+    margin: 3px 10px 3px 4px
+    background: $color-fg
+    color: white
+    padding: 3px 5px
+    border-radius: 10px
+    text-shadow: 0 -1px 0 $color-bg
+    font-size: 0.9em
+
+.add-category
+  border-top: 1px solid $gray-bg
+  border-bottom: 1px solid $gray-bg
+
+  .category-idle-box
+    width: 100%
+    height: 30px
+    border: none
+    background: none
+    color: $gray-bg
+    cursor: pointer
+    text-align: left
+    font-family: "Work Sans", Helvetica, Arial, sans-serif
+
+    &:hover
+      color: $gray-dk
+
+  .category-edit-box
+    display: none
+
+    input[type="text"]
+      box-sizing: border-box
+      font-size: 12px
+      display: inline-block
+      width: 80%
+      height: 30px
+      padding: 0 10px
+      margin: 0
+      float: left
+      line-height: 30px
+      border: none
+      background: none
+      font-family: "Work Sans", Helvetica, Arial, sans-serif
+
+    button
+      width: 20%
+      height: 30px
+      line-height: 30px
+      margin: 0
+      padding: 0
+      border: none
+      font-size: 16px
+      background: none
+      color: #6C3
+      cursor: pointer
+
+      &:hover
+        color: #4B2
+
+.edit-category-delete
+  background: none
+  border: none
+  font-size: 1em
+  color: $color-fg
+  font-family: "Work Sans", Helvetica, Arial, sans-serif
+  cursor: pointer
+
+  &:hover
+    color: $color-bg
+
+/* CATEGORY EDIT */
+.edit-category
+  .edit-category-name
+    margin: 30px 15px 10px
+
+    input[type="text"]
+      display: block
+      background: none
+      border: none
+      padding-bottom: 5px
+      border-bottom: 1px solid #DDD
+      width: 100%
+      font-family: "Work Sans", Helvetica, Arial, sans-serif
+      font-size: 1.8em
+
+      &::placeholder
+        color: $color-fg
+        opacity: 1
+
+      &:hover::placeholder
+        color: $color-bg
+        opacity: 1
+
+  .edit-category-details textarea
+    box-sizing: border-box
+    margin: 0
+    padding: 10px 15px 15px
+    border: none
+    background: none
+    width: 100%
+    height: 200px
+    resize: none
+    font-family: "Work Sans", Helvetica, Arial, sans-serif
+    font-size: 0.8em
+
+    &::placeholder
+      color: $color-fg
+      opacity: 1
+
+    &:hover::placeholder
+      color: $color-bg
+      opacity: 1
+
+  .edit-category-save
+    background: none
+    border: none
+    font-size: 1em
+    color: #6C3
+    font-family: "Work Sans", Helvetica, Arial, sans-serif
+    cursor: pointer
+
+    &:hover
+      color: #4B2
+
+/* CATEGORY DESTROY */
+.delete-category
+  margin-top: 10px
+  position: relative
+  font-size: 0.9em
+
+  input[type="radio"]
+    visibility: hidden
+    opacity: 0
+    width: 0
+    height: 0
+    position: absolute
+    top: 0
+    left: 0
+
+    & + label::before
+      content: '\f111'
+      font-family: 'Font Awesome 5 Free'
+      margin-right: 5px
+      color: $gray-dk
+
+    &:checked + label::before
+      content: '\f058'
+      color: #4B2
+      font-weight: 700
+
+  label
+    cursor: pointer
+    border-radius: 3px
+    margin-bottom: 2px
+    font-size: 0.9em
+    color: $gray-dk
+    padding: 5px
+
+    &:hover
+      background: $gray-fg
+
+  input[type="submit"]
+    box-sizing: border-box
+    height: 40px
+    width: 100%
+    font-size: 1.1em
+    background: $color-fg
+    text-shadow: 0 -1px 0 $color-bg
+    border-radius: 20px
+    border: none
+    color: white
+    font-family: "Work Sans", Helvetica, Arial, sans-serif
+    cursor: pointer
+    margin-top: 15px
+
+    &:hover
+      background: $color-bg
+
+    &[disabled]
+      background: $gray-bg
+      text-shadow: 0 -1px 0 $gray-dk
+
+.change-task-category
+  height: 30px
+  position: relative
+
+  .show-categories
+    width: 100%
+    box-sizing: border-box
+    background: none
+    border-radius: 3px
+    display: block
+    height: 30px
+    padding: 0 15px
+    line-height: 30px
+    font-size: 0.9em
+    color: $color-fg
+    border: none
+    text-align: left
+    cursor: pointer
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+    font-family: "Work Sans", Helvetica, Arial, sans-serif
+
+    i
+      float: right
+      margin-top: 7px
+
+    &:hover,
+    &:active
+      color: $color-bg
+
+  ul
+    position: absolute
+    top: 100%
+    left: 0
+    right: 0
+    width: 100%
+    display: none
+    max-height: 200px
+    overflow: scroll
+    border-radius: 2px
+    z-index: 1
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2)
+
+    button
+      width: 100%
+      height: 30px
+      font-size: 1em
+      padding: 0 15px
+      background: $gray-bg
+      color: white
+      font-family: "Work Sans", Helvetica, Arial, sans-serif
+      border: none
+      cursor: pointer
+      overflow: hidden
+      display: block
+      text-overflow: ellipsis
+      white-space: nowrap
+      text-align: left
+
+      &:hover, &:active
+        background: $gray-dk

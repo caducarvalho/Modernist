@@ -1,0 +1,14 @@
+<ul class="category-tasks">
+  <% tasks.each do |task| %>
+  <li class="<%= task.completed? ? 'task completed' : 'task' %>">
+    <%= content_tag(:button, task.completed? ? icon('far', 'check-circle') : icon('far', 'circle'), class: 'task-check-button', 'data-task-id' => task.id, type: :button) %>
+    <%#= link_to(task.completed? ? icon('far', 'check-circle') : icon('far', 'circle'), complete_task_url(task.id), method: :patch, remote: true, class: 'task-check') %>
+    <%= link_to(icon('fa', 'trash'), task_path(task), method: :delete, data: { confirm: 'Are you certain you want to delete this?' }, class: 'task-delete') %>
+    <% if local_assigns.has_key? :category_name %>
+      <%= link_to format_task_name(task, task.category.name), edit_task_path(task), class: 'task-description' %>
+    <% else %>
+      <%= link_to format_task_name(task), edit_task_path(task), class: 'task-description' %>
+    <% end %>
+  </li>
+  <% end %>
+</ul>

@@ -1,0 +1,70 @@
+<div class="container">
+  <%= form_for @task, html: { class: 'edit-task' } do |task| %>
+    <div id="top">
+      <div class="edit-task-name">
+        <%= task.text_field :task %>
+      </div>
+
+      <%= task.hidden_field :category_id, class: 'task-category-selector' %>
+
+      <% if @categories.count > 1 %>
+        <div class="edit-task-category">
+          <button type="button" class="show-categories">
+            <%= icon('fa', 'chevron-down') %>
+            <span class="fa fa-tag"></span>
+            <span class="task-category-label"><%= @task.category.name %></span>
+          </button>
+
+          <ul class="categories-menu">
+            <% @categories.each do |category| %>
+              <li>
+                <button type="button" value="<%= category.id %>"><%= category.name %></button>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="edit-task-details">
+      <%= task.text_area :details, placeholder: 'Add details' %>
+    </div>
+
+    <div class="edit-task-due-date">
+      <div class="edit-due-date">
+        <%= task.label :due_date %>
+        <%= task.date_field :due_date %>
+      </div>
+      <div class="edit-completion">
+        <%= task.check_box :completed %>
+        <%= task.label :completed %>
+      </div>
+    </div>
+
+    <div class="edit-task-icon">
+      <% icons_count = @icons.count %>
+      <% if @task.icon_id == nil %>
+        <% @icons.each_with_index do |i, j| %>
+          <%= '<span>'.html_safe if j == 0 || j == (icons_count / 2) %>
+          <%= task.radio_button :icon_id, i.id %>
+          <%= task.label "icon_id_#{j+1}", icon('fa', i.name, class: 'fa-fw') %>
+          <%= '</span>'.html_safe if j == icons_count || j == (icons_count / 2) - 1 %>
+        <% end %>
+      <% else %>
+        <% @icons.each_with_index do |i, j| %>
+          <%= '<span>'.html_safe if j == 0 || j == (icons_count / 2) %>
+          <%= task.radio_button :icon_id, i.id, checked: (@task.icon.id == j+1 ? 'checked' : '' ) %>
+          <%= task.label "icon_id_#{j+1}", icon('fa', i.name, class: 'fa-fw') %>
+          <%= '</span>'.html_safe if j == icons_count || j == (icons_count / 2) - 1 %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <ul class="further-actions">
+      <%= content_tag(:li, task.button('Save', type: :submit, class: 'edit-task-save'), class: 'back') %>
+      <%= content_tag(:li, link_to('Try Pomodoro', pomodoro_path(@task), class: 'back')) if @task.completed == false %>
+      <%= content_tag(:li, link_to('Tasks', root_path), class: 'back') %>
+      <%= content_tag(:li, link_to('Delete', task_path(@task), method: :delete, data: { confirm: 'Are you certain you want to delete this?' }), class: 'delete') %>
+    </ul>
+  <% end %>
+</div>

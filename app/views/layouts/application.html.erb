@@ -5,18 +5,51 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+
+    <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/apple-touch-icon-76x76-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/apple-touch-icon-152x152-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/apple-touch-icon-180x180-precomposed.png">
+    <link rel="icon" sizes="192x192" href="/touch-icon-192x192.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700" rel="stylesheet">
   </head>
 
   <body>
-    <% if current_user %>
-    <ul>
-      <li><%= current_user.full_name %></li>
-      <li><%= link_to("Logout", '/logout', data: { confirm: 'Are you certain you want to logout?' }) %></li>
-    </ul>
-    <% end %>
+    <main role="main">
+      <ul class="box-alert">
+        <% if flash.count > 0 %>
+          <% flash.each do |key, value| %>
+            <li class="alert-<%= key %>"><%= value %></li>
+          <% end %>
+        <% end %>
+      </ul>
 
-    <%= yield %>
+      <nav>
+        <h1>
+          <%= @back_button ? link_to(icon('fa', 'chevron-left'), root_path, id: 'back-menu-button') : content_tag(:button, icon('fa', 'bars'), type: :button, id: 'open-menu-button') %>
+          <%= link_to(image_tag('icon.png', alt: 'Modern GTD'), root_path) %>
+        </h1>
+
+        <% if current_user %>
+        <ul>
+          <li><%= link_to(current_user.first_name, edit_user_path(current_user)) %></li>
+          <li><%= link_to(icon('fa', 'power-off'), '/logout', data: { confirm: 'Are you certain you want to logout?' }) %></li>
+        </ul>
+        <% end %>
+      </nav>
+
+      <%= yield %>
+    </main>
+
+    <%= render 'shared/modal' do content_for(:modal) end if content_for(:modal) %>
   </body>
 </html>

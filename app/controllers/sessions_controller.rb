@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    render layout: 'user'
   end
 
   def create
@@ -7,9 +8,12 @@ class SessionsController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
+      redirect_to root_path
+    else
+      flash[:alert] = "The user #{params[:email]} doesn't exist or the password is incorrect"
+      redirect_to '/login'
     end
 
-    redirect_to root_path
   end
 
   def destroy

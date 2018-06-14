@@ -1,19 +1,198 @@
-<h1>Tasks</h1>
+<% if @categories_count > 0 %>
 
-<%= form_tag("/create", method: "post") do %>
-  <%= hidden_field_tag('task[user_id]', current_user.id) %>
-  <%= text_field_tag('task[task]') %>
-  <%= submit_tag("Add task") %>
-<% end %>
+<div class="container">
+  <aside>
 
-<hr>
+    <div class="overdue-tasks-container">
+      <% if @overdue_count > 0 %>
+        <h1>Overdue tasks</h1>
+        <ul class="overdue-tasks">
+          <% @overdue_tasks.each do |task| %>
+          <li><%= content_tag(:span, days_overdue(task), class: 'days-overdue-count') %> <%= link_to(task.task, edit_task_path(task)) %></li>
+          <% end %>
+          <%= content_tag(:li, link_to('Check all overdue tasks', overdue_tasks_path)) if @overdue_count > 5 %>
+        </ul>
+      <% end %>
+    </div>
 
-<% if @tasks.count > 0 %>
-  <ul class="tasks">
-    <% @tasks.each do |task| %>
-    <li class="task"><%= link_to task.task, task %></li>
+
+    <div class="today-tasks-container">
+      <% if @today_count > 0 %>
+        <h1>Tasks for today</h1>
+        <ul class="today-tasks">
+          <% @today_tasks.each do |task| %>
+          <li><%= link_to(task.task, edit_task_path(task)) %></li>
+          <% end %>
+          <%= content_tag(:li, link_to('Check all today tasks', today_tasks_path)) if @today_count > 5 %>
+        </ul>
+      <% end %>
+    </div>
+
+    <div class="categories-container">
+      <h1>Categories</h1>
+      <ul class="categories">
+        <% @categories.each do |category| %>
+          <li><%= content_tag(:span, category.tasks.to_do(current_user.id, category).count, class: 'category-count', 'data-category-id': category.id) %> <%= link_to(category.name, category_path(category.id)) %></li>
+        <% end %>
+      </ul>
+
+      <%= form_tag("/categories", method: "post", class: 'add-category') do %>
+        <%= hidden_field_tag('category[user_id]', current_user.id) %>
+
+        <div class="add-category-box">
+          <button class="category-idle-box" type="button"><%= icon('fa', 'plus-circle') %> Add category</button>
+          <div class="category-edit-box">
+            <%= text_field_tag('category[name]', nil, class: 'category-input', placeholder: "Add category") %>
+            <%= button_tag(icon('fa', 'plus-circle'), class: 'category-submit', type: 'submit') %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </aside>
+
+  <section>
+    <div id="top">
+      <h1>My tasks</h1>
+
+      <%= form_tag("/tasks", method: "post", class: 'add-task') do %>
+        <%= hidden_field_tag('task[user_id]', current_user.id) %>
+        <%= hidden_field_tag('task[category_id]', @categories[0].id, class: 'task-category-selector') if @categories_count > 0 %>
+
+        <div class="add-task-box">
+          <%= text_field_tag('task[task]', nil, class: 'task-input', placeholder: "Enter new task") %>
+          <div class="task-submit-box">
+            <%= submit_tag('Add task', class: 'task-submit') %>
+          </div>
+        </div>
+
+        <% if @categories_count > 1 %>
+          <div class="add-task-attribute-box">
+            <button type="button" class="idle-box">
+              <%= icon('fa', 'plus-circle') %>
+              Add category
+            </button>
+            <div class="add-task-category edit-box">
+              <button type="button" class="show-categories">
+                <%= icon('fa', 'chevron-down') %>
+                <span class="task-category-label"><%= @categories[0].name %></span>
+              </button>
+
+              <ul class="categories-menu">
+                <% @categories.each do |category| %>
+                  <li>
+                    <button type="button" value="<%= category.id %>"><%= category.name %></button>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="add-task-attribute-box">
+          <button type="button" class="idle-box">
+            <%= icon('fa', 'plus-circle') %>
+            Add details
+          </button>
+
+          <div class="add-task-details edit-box">
+            <%= text_area_tag('task[details]', '', placeholder: 'Add details') %>
+          </div>
+        </div>
+
+        <div class="add-task-attribute-box">
+          <button type="button" class="idle-box">
+            <%= icon('fa', 'plus-circle') %>
+            Add due date
+          </button>
+
+          <div class="add-task-due-date edit-box">
+            <%= label_tag('task[due_date]') do %>
+              Due date: <%= date_field_tag('task[due_date]') %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="add-task-attribute-box">
+          <button type="button" class="idle-box">
+            <%= icon('fa', 'plus-circle') %>
+            Add icon
+          </button>
+
+          <div class="add-task-icon edit-box">
+            <% icon_count = @icons.count %>
+            <% @icons.each_with_index do |i, j| %>
+              <%= '<span>'.html_safe if j == 0 || j == (icon_count / 2) %>
+              <%= radio_button_tag('task[icon_id]', i.id) %>
+              <%= label_tag "task[icon_id_#{j+1}]", icon('fa', i.name, class: 'fa-fw') %>
+              <%= '</span>'.html_safe if j == icon_count || j == (icon_count / 2) - 1 %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @task_count > 0 %>
+      <ul class="tasks">
+        <% @categories.each do |category| %>
+          <% if category.tasks.count > 0 %>
+            <li>
+              <%= content_tag(:span, category.tasks.count, class: 'category-count') %>
+              <div class="category-name-box">
+                <%= link_to(icon('fa', 'tag') + category.name, category_path(category), class: 'category-name') %>
+              </div>
+
+              <%= render 'tasks/list_tasks', tasks: category.tasks %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="tasks-zero-state">
+        <h2><%= icon('fa', 'clipboard-list') %></h2>
+        <p>Here's your task list. You can create a new task in the field above, and mark it as completed any time you want. You can try to add more details to your new tasks.</p>
+      </div>
     <% end %>
-  </ul>
+  </section>
+</div>
+
 <% else %>
-  <p>You don't have tasks yet. Try creating a new one.</p>
+<div class="container-zero-state">
+  <h1>Welcome to your list!</h1>
+
+  <p>Let's create your first category. You can organize your tasks with categories and separate them according to each context you need.</p>
+  <p>Select a category from the list below. Once you start, you can create as many categories as you need.</p>
+
+  <%= form_tag("/categories", method: "post", class: 'add-first-category') do %>
+    <%= hidden_field_tag('category[user_id]', current_user.id) %>
+
+    <ul>
+      <li>
+        <%= radio_button_tag('category[name]', 'Work') %>
+        <%= label_tag('category_name_Work', "#{icon('fa', 'briefcase')} Work".html_safe) %>
+      </li>
+      <li>
+        <%= radio_button_tag('category[name]', 'Project') %>
+        <%= label_tag('category_name_Project', "#{icon('fa', 'cogs')} Project".html_safe) %>
+      </li>
+      <li>
+        <%= radio_button_tag('category[name]', 'Weekend') %>
+        <%= label_tag('category_name_Weekend', "#{icon('fa', 'bicycle')} Weekend".html_safe) %>
+      </li>
+      <li>
+        <%= radio_button_tag('category[name]', 'Shopping list') %>
+        <%= label_tag('category_name_Shopping_list', "#{icon('fa', 'shopping-basket')} Shopping list".html_safe) %>
+      </li>
+      <li>
+        <%= radio_button_tag('category[name]', 'To do') %>
+        <%= label_tag('category_name_To_do', "#{icon('fa', 'tasks')} To do".html_safe) %>
+      </li>
+      <li>
+        <%= radio_button_tag('category[name]', 'Other') %>
+        <%= label_tag('category_name_Other', "#{icon('fa', 'clipboard-list')} Other".html_safe) %>
+      </li>
+    </ul>
+    <%= submit_tag('Add category', class: 'first-category-submit', disabled: true) %>
+
+  <% end %>
+</div>
 <% end %>

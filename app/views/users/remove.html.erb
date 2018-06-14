@@ -1,0 +1,25 @@
+<div class="container">
+  <%= render 'menu' %>
+
+  <section>
+    <div id="top">
+      <h1>Delete account</h1>
+    </div>
+
+    <%= form_for @user, method: 'delete', html: { class: 'edit-user-remove', autocomplete: :off } do |u| %>
+    <ul>
+      <li class="input-group">
+        <%= label_tag :current_password %>
+        <%= password_field_tag :current_password, nil, placeholder: 'Current password', autocomplete: :off %>
+      </li>
+      <li class="input-group remove-confirmation">
+        <%= check_box_tag :remove_confirmation %>
+        <%= label_tag :remove_confirmation, 'I acknowledge that, once my account is deleted, all my data will be permanently lost.' %>
+      </li>
+      <li>
+        <%= u.submit "Delete account", disabled: true, id: 'edit-user-remove' %>
+      </li>
+    </ul>
+    <% end %>
+  </section>
+</div>

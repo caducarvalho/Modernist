@@ -1,21 +1,41 @@
-<h1>Signup!</h1>
+<% content_for :title, "Signup – Get Things Done" %>
 
-<%= form_for @user, url: '/users' do |u| %>
+<%= form_for @user, url: '/users', html: { class: 'user' } do |u| %>
+<ul>
+  <li class="input-group">
+    <%= u.label :first_name %>
+    <%= u.text_field :first_name %>
+  </li>
+  <li class="input-group">
+    <%= u.label :last_name %>
+    <%= u.text_field :last_name %>
+  </li>
+  <li class="input-group">
+    <%= u.label :email %>
+    <%= u.text_field :email %>
+  </li>
+  <li class="input-group">
+    <%= u.label :password %>
+    <%= u.password_field :password %>
 
-  <%= u.label :first_name %>
-  <%= u.text_field :first_name %>
-
-  <%= u.label :last_name %>
-  <%= u.text_field :last_name %>
-
-  <%= u.label :email %>
-  <%= u.text_field :email %>
-
-  <%= u.label :password %>
-  <%= u.password_field :password %>
-
-  <%= u.label :password_confirmation %>
-  <%= u.password_field :password_confirmation %>
-
-  <%= u.submit "Submit" %>
+    <div class="hide" id="password-criteria">
+      <p>Your new password must contain at least:</p>
+      <ul>
+        <li class="invalid" id="criteria-lower">A lowercase letter</li>
+        <li class="invalid" id="criteria-upper">An uppercase letter</li>
+        <li class="invalid" id="criteria-number">A number</li>
+        <li class="invalid" id="criteria-length">8 characters</li>
+      </ul>
+    </div>
+  </li>
+  <li class="input-group">
+    <%= u.label :password_confirmation %>
+    <%= u.password_field :password_confirmation %>
+  </li>
+  <li>
+    <%= u.submit 'Create account', disabled: true, id: 'user-create-submit' %>
+  </li>
+</ul>
 <% end %>
+
+<p class="after">Already have an account? <%= link_to "Login", '/login' %></p>

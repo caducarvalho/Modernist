@@ -1,0 +1,37 @@
+<div class="container">
+  <%= render 'menu' %>
+
+  <section>
+    <div id="top">
+      <h1>User details</h1>
+    </div>
+
+    <% if @user && @user.errors.any? %>
+      <%= @user %>
+    <% end %>
+
+    <%= form_for @user, html: { class: 'edit-user' } do |u| %>
+    <ul>
+      <li class="input-group">
+        <%= u.label :first_name %>
+        <%= u.text_field :first_name %>
+      </li>
+      <li class="input-group">
+        <%= u.label :last_name %>
+        <%= u.text_field :last_name %>
+      </li>
+      <li class="input-group">
+        <%= u.label :email %>
+        <%= u.text_field :email %>
+      </li>
+      <li class="input-group input-group-password hide">
+        <%= label_tag :current_password %>
+        <%= password_field_tag :current_password, nil, placeholder: 'Current password', autocomplete: :off %>
+      </li>
+      <li>
+        <%= u.submit "Change details", disabled: true, id: 'edit-user-submit' %>
+      </li>
+    </ul>
+    <% end %>
+  </section>
+</div>

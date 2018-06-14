@@ -1,0 +1,39 @@
+<h1><%= @task.task %></h1>
+
+<div id="pomodoro-controls">
+  <p>The <a href="https://francescocirillo.com/pages/pomodoro-technique" target="_blank">Pomodoro Technique</a> is a time management technique to improve performance and measure task complexity.</p>
+  <p>You can set the controls below to adjust sprint time, also small and long breaks to relax your brain.</p>
+
+  <h2>Sprint time:</h2>
+  <input type="range" id="pomodoro-sprint" value="25" min="20" max="35">
+  <span>25 minutes</span>
+
+  <h2>Short break:</h2>
+  <input type="range" id="pomodoro-short" value="5" min="3" max="10">
+  <span>5 minutes</span>
+
+  <h2>Long break (after 4 rounds):</h2>
+  <input type="range" id="pomodoro-long" value="20" min="15" max="30">
+  <span>20 minutes</span>
+
+  <button type="button" id="pomodoro-start">Start</button>
+  <p class="cancel"><%= link_to('Cancel', root_path) %></p>
+</div>
+
+<div id="pomodoro-timer">
+  <h2 id="pomodoro-icon"><%= icon('fa', 'stopwatch') %></h2>
+
+  <p id="pomodoro-cycles">&nbsp;</p>
+  <p id="pomodoro-time">&nbsp;</p>
+  <p id="pomodoro-message">&nbsp;</p>
+
+  <%= form_for @task, url: { action: 'check_complete' } do |task| %>
+    <%= task.hidden_field :id %>
+    <%= task.submit 'Finish task', id: 'pomodoro-finish', disabled: true %>
+  <% end %>
+  <p class="cancel"><%= link_to('Reset', '#', id: 'pomodoro-reset') %> | <%= link_to('Cancel', root_path) %></p>
+</div>
+
+<div id="pomodoro-progress">
+  <div id="pomodoro-progress-bar"></div>
+</div>

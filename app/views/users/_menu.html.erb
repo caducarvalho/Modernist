@@ -1,0 +1,8 @@
+<aside>
+  <ul class="user-menu">
+    <li><%= link_to 'User details', edit_user_path(current_user), class: (params[:action] == 'edit' ? 'active' : '') %></li>
+    <li><%= link_to 'Change password', edit_password_path, class: (params[:action] == 'edit_password' ? 'active' : '') %></li>
+    <li><%= link_to 'Delete account', remove_user_path, class: (params[:action] == 'remove' ? 'active' : '') %></li>
+    <li><%= link_to '&larr; Back to tasks'.html_safe, root_path %></li>
+  </ul>
+</aside>

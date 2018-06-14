@@ -1,10 +1,17 @@
-<h1>Login</h1>
+<% content_for :title, "Login – Get Things Done" %>
 
-<%= form_tag '/login' do %>
+<%= form_tag '/login', class: 'user' do %>
   <ul>
-    <li><%= label_tag :email %> <%= text_field_tag :email %></li>
-    <li><%= label_tag :password %> <%= password_field_tag :password %></li>
-    <li><%= submit_tag "Submit" %></li>
-    <li><%= link_to "Signup", '/signup' %></li>
+    <li class="input-group">
+      <%= label_tag :email, 'E-mail' %>
+      <%= text_field_tag :email %>
+    </li>
+    <li class="input-group">
+      <%= label_tag :password %>
+      <%= password_field_tag :password %>
+    </li>
+    <li><%= submit_tag "Login" %></li>
   </ul>
 <% end %>
+
+<p class="after">Doesn't have an account? <%= link_to "Signup", '/signup' %></p>

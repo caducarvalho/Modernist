@@ -1,0 +1,205 @@
+.container-pomodoro
+  width: 300px
+  margin: 0 auto
+
+  header
+    text-align: center
+    margin-top: 20px
+
+    img
+      width: 80px
+
+  h1
+    text-align: center
+    color: $gray-dk
+    margin-bottom: 30px
+    font-size: 1.2em
+
+  .cancel
+    margin-top: 10px
+    text-align: center
+
+    a
+      color: $gray-dk
+
+      &:hover
+        color: $gray-dr
+
+#pomodoro-controls
+  font-size: 0.9em
+  margin-bottom: 50px
+
+  p
+    margin-bottom: 10px
+
+  h2
+    color: $gray-dr
+    text-align: center
+    margin-top: 30px
+
+  input + span
+    display: block
+    font-size: 0.9em
+    color: $gray-dk
+    text-align: center
+
+  input[type="range"]
+    height: 24px
+    -webkit-appearance: none
+    margin: 10px 0 0
+    width: 100%
+    background: none
+
+  input[type="range"]:focus
+    outline: none
+
+  input[type="range"]::-webkit-slider-runnable-track
+    width: 100%
+    height: 4px
+    cursor: pointer
+    background: $gray-dk
+    border-radius: 1px
+
+  input[type="range"]::-webkit-slider-thumb
+    height: 18px
+    width: 18px
+    border-radius: 18px
+    border: none
+    background: $gray-bg
+    cursor: pointer
+    -webkit-appearance: none
+    margin-top: -7px
+
+  input[type="range"]:focus::-webkit-slider-runnable-track
+    background: $gray-dr
+
+  input[type="range"]::-moz-range-track
+    width: 100%
+    height: 4px
+    cursor: pointer
+    background: $gray-dk
+    border-radius: 1px
+
+  input[type="range"]::-moz-range-thumb
+    height: 18px
+    width: 18px
+    border: none
+    border-radius: 18px
+    background: $gray-bg
+    cursor: pointer
+
+  input[type="range"]::-ms-track
+    width: 100%
+    height: 4px
+    cursor: pointer
+    background: transparent
+    border-color: transparent
+    color: transparent
+
+  input[type="range"]::-ms-fill-lower
+    background: $gray-dk
+    border-radius: 2px
+
+  input[type="range"]::-ms-fill-upper
+    background: $gray-dk
+    border-radius: 2px
+
+  input[type="range"]::-ms-thumb
+    margin-top: 1px
+    height: 18px
+    width: 18px
+    border-radius: 18px
+    border: none
+    background: $gray-bg
+    cursor: pointer
+
+  input[type="range"]:focus::-ms-fill-lower
+    background: $gray-dr
+
+  input[type="range"]:focus::-ms-fill-upper
+    background: $gray-dr
+
+  #pomodoro-start
+    margin: 30px auto 0
+    display: block
+    box-sizing: border-box
+    height: 40px
+    width: 120px
+    font-size: 18px
+    background: $color-fg
+    text-shadow: 0 -1px 0 $color-bg
+    border-radius: 20px
+    border: none
+    color: white
+    font-family: "Work Sans", Helvetica, Arial, sans-serif
+    cursor: pointer
+    -webkit-appearance: none
+
+    &:hover
+      background: $color-bg
+
+#pomodoro-timer
+  margin-bottom: 50px
+  display: none
+
+  h2
+    font-size: 8em
+    color: $gray-bg
+    text-align: center
+
+  #pomodoro-cycles
+    color: #4B2
+    text-align: center
+    font-size: 1.4em
+    margin-top: 10px
+
+    i
+      margin: 0 5px
+
+  #pomodoro-message
+    color: $gray-bg
+    text-align: center
+
+  #pomodoro-time
+    text-align: center
+    color: $gray-dk
+    margin: 30px 0
+    font-size: 1.4em
+
+  #pomodoro-finish
+    margin: 30px auto 0
+    display: block
+    box-sizing: border-box
+    height: 40px
+    width: 180px
+    font-size: 18px
+    background: $color-fg
+    text-shadow: 0 -1px 0 $color-bg
+    border-radius: 20px
+    border: none
+    color: white
+    font-family: "Work Sans", Helvetica, Arial, sans-serif
+    cursor: pointer
+    -webkit-appearance: none
+
+    &:hover
+      background: $color-bg
+
+    &:disabled
+      background: $gray-bg
+      text-shadow: 0 -1px 0 $gray-dk
+
+#pomodoro-progress
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  width: 100%
+  height: 5px
+
+  #pomodoro-progress-bar
+    height: 5px
+    background: $color-fg
+    box-shadow: 0 0 4px $color-fg
+    width: 0
+    transition: width 1s

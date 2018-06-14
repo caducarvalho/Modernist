@@ -1,0 +1,191 @@
+/* LOGIN AND SIGNUP */
+header
+  margin: 50px auto 20px
+  width: 200px
+
+  img
+    width: 100%
+
+.container-user
+  width: 300px
+  margin: 0 auto
+
+  label
+    color: $color-fg
+
+  input[type="text"],
+  input[type="password"]
+    background: none
+    border: none
+    border-radius: 0
+    box-sizing: border-box
+    width: 100%
+    padding: 5px 0
+    height: 40px
+    line-height: 40px
+    font-size: 1.3em
+    font-family: "Work Sans", Helvetica, Arial, sans-serif
+    margin-bottom: 10px
+    border-bottom: 1px solid $gray-bg
+
+    &:hover,
+    &:focus
+      border-bottom-color: $gray-dk
+
+  input[type="submit"]
+    box-sizing: border-box
+    height: 40px
+    width: 100%
+    font-size: 1.2em
+    background: $color-fg
+    text-shadow: 0 -1px 0 $color-bg
+    border-radius: 20px
+    border: none
+    color: white
+    font-family: "Work Sans", Helvetica, Arial, sans-serif
+    cursor: pointer
+    -webkit-appearance: none
+
+    &:hover
+      background: $color-bg
+
+    &:disabled
+      background: $gray-bg
+      text-shadow: 0 -1px 0 $gray-dk
+
+.after
+  margin-top: 20px
+  font-size: 0.9em
+  color: $gray-bg
+  text-align: center
+
+#password-criteria
+  position: absolute
+  bottom: 100%
+  left: 10px
+  right: 10px
+  background: rgba(255,255,255,0.95)
+  border-radius: 4px
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2)
+  padding: 10px
+  font-size: 0.9em
+  line-height: 1.2em
+  cursor: default
+
+  &::after
+    top: 100%
+    left: 50%
+    border: solid transparent
+    content: " "
+    height: 0
+    width: 0
+    position: absolute
+    pointer-events: none
+    border-color: transparent
+    border-top-color: rgba(255,255,255,0.95)
+    border-width: 7px
+    margin-left: -7px
+
+  p
+    margin-bottom: 10px
+
+  ul
+    font-size: 0.9em
+
+    li.valid
+      color: #4B2
+
+      &::before
+        content: "\f14a"
+        font-family: "Font Awesome 5 Free"
+        font-weight: 900
+        width: 18px
+        display: inline-block
+
+    li.invalid
+      color: #F92
+
+      &::before
+        content: "\f057"
+        font-family: "Font Awesome 5 Free"
+        font-weight: 900
+        width: 18px
+        display: inline-block
+
+/* EDIT USER */
+.edit-user,
+.edit-user-password,
+.edit-user-remove
+  padding: 10px 15px
+
+  label
+    color: $color-fg
+
+  input[type="text"],
+  input[type="password"]
+    box-sizing: border-box
+    width: 100%
+    padding: 10px 0 5px
+    margin-bottom: 10px
+    border: none
+    border-bottom: 1px solid $gray-bg
+    background: none
+    font-family: "Work Sans", Helvetica, Arial, sans-serif
+    font-size: 1.4em
+    border-radius: 0
+
+  input[type="submit"]
+    box-sizing: border-box
+    height: 40px
+    width: 100%
+    font-size: 18px
+    background: $color-fg
+    text-shadow: 0 -1px 0 $color-bg
+    border-radius: 20px
+    border: none
+    color: white
+    font-family: "Work Sans", Helvetica, Arial, sans-serif
+    cursor: pointer
+    margin-top: 25px
+    -webkit-appearance: none
+
+    &:hover
+      background: $color-bg
+
+    &[disabled]
+      background: $gray-bg
+      text-shadow: 0 -1px 0 $gray-dk
+
+  #remove_confirmation
+    position: absolute
+    top: 0
+    left: 0
+    visibility: hidden
+    opacity: 0
+
+    & + label
+      color: $gray-bg
+      cursor: pointer
+      padding-left: 20px
+
+      &::before
+        content: '\f0c8'
+        font-family: "Font Awesome 5 Free"
+        color: $gray-dk
+        float: left
+        margin-left: -20px
+
+    &:checked + label::before
+      content: '\f14a'
+      color: #4B2
+
+.user-menu a
+  display: block
+  font-size: 0.8em
+  padding: 10px
+  border-radius: 2px
+
+  &:hover,
+  &.active
+    background: $gray-fg
+    color: $color-bg

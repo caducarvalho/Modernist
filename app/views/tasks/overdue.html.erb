@@ -1,0 +1,11 @@
+<div class="container">
+  <div id="top">
+    <%= content_tag(:h1, 'Overdue tasks') %>
+  </div>
+
+  <%= render 'tasks/list_tasks', tasks: @overdue_tasks, category_name: true %>
+
+  <ul class="further-actions">
+    <li class="back"><%= link_to 'Tasks', root_path %></li>
+  </ul>
+</div>

@@ -1,0 +1,311 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+@import font-awesome-sprockets
+@import font-awesome
+@import reset
+@import helpers
+@import categories
+@import tasks
+@import users
+@import pomodoro
+
+body
+  background: #FFF9F3
+  background-attachment: fixed
+  font-family: "Work Sans", Helvetica, Arial, sans-serif
+  color: #210
+
+a
+  color: $color-fg
+  text-decoration: none
+
+  &:hover
+    color: $color-bg
+
+label
+  display: block
+  line-height: 20px
+  padding: 5px 0
+
+main
+  max-width: 600px
+  padding: 10px
+  margin: 20px auto
+
+nav
+  display: table
+  color: #210
+  width: 100%
+  margin: 0 0 20px
+
+  a
+    text-shadow: 0 1px 0 white
+
+  h1
+    display: table-cell
+    font-size: 1.6em
+    height: 60px
+    vertical-align: middle
+
+    a
+      padding: 0
+
+      img
+        margin: 0
+        width: 60px
+        height: 60px
+
+  ul
+    display: table-cell
+    text-align: right
+    vertical-align: middle
+
+    li
+      display: inline-block
+      line-height: 40px
+      padding: 0 10px
+      border-left: 1px solid $gray-bg
+
+      &:first-child
+        border: none
+
+.container
+  margin: 0
+  display: table
+  table-layout: fixed
+  width: 100%
+  overflow: hidden
+
+aside, section
+  display: table-cell
+  vertical-align: top
+
+aside
+  width: 180px
+
+  h1
+    font-size: 0.8em
+    text-transform: uppercase
+    font-weight: 700
+    padding: 10px
+
+@media (max-width: 555px)
+  main
+    margin: 0 auto
+
+  .container
+    display: block
+
+  aside
+    display: block
+    position: fixed
+    top: 0
+    bottom: 0
+    left: -190px
+    height: 100%
+    background: white
+    box-shadow: 2px 0 4px rgba(0,0,0,0.2)
+    z-index: 10
+
+  section
+    display: block
+
+#open-menu-button,
+#back-menu-button
+  display: none
+  width: 32px
+  height: 32px
+  line-height: 32px
+  font-size: 14px
+  border-radius: 17px
+  border: 1px solid $gray-bg
+  color: $gray-dk
+  background: none
+  cursor: pointer
+  vertical-align: 24px
+  margin-right: 5px
+  box-sizing: border-box
+  text-align: center
+  -webkit-appearance: none
+  padding: 0
+  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s
+
+  &:hover
+    border-color: $gray-dk
+    color: $gray-dr
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2)
+
+  &:active
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2)
+
+@media (max-width: 555px)
+  #open-menu-button,
+  #back-menu-button
+    display: inline-block
+
+  #open-menu-backdrop
+    z-index: 5
+    display: none
+    position: fixed
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    width: 100%
+    height: 100%
+    background: rgba(0,0,0,0.6)
+    z-index: 1
+    -webkit-backdrop-filter: blur(10px)
+
+#top
+  h1
+    padding: 0 15px 15px
+    font-size: 3em
+    font-weight: 700
+    letter-spacing: -1px
+
+    &.task-description
+      font-size: 2em
+      font-weight: normal
+
+  .task-details,
+  .category-details
+    padding: 15px
+    font-size: 0.8em
+
+    p
+      margin-bottom: 10px
+
+  .task-icon-big
+    float: right
+    color: $color-fg
+    font-size: 1.6em
+    margin: 15px
+
+.box-alert
+  position: fixed
+  top: 0
+  left: 0
+  width: 300px
+  margin: 0
+  padding: 0
+
+[class^="alert-"]
+  color: white
+  padding: 15px 10px
+  padding-left: 50px
+  margin: 10px
+  background: $gray-bg
+  font-size: 0.8em
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2)
+  text-shadow: 0 1px 0px rgba(0,0,0,0.2)
+  border-radius: 4px
+
+  &::before
+    content: '\f0f3'
+    font-family: "Font Awesome 5 Free"
+    font-weight: 700
+    float: left
+    margin: 0 0 0 -28px
+    text-shadow: none
+    color: $gray-dk
+
+.alert-notice
+  background: #4B2
+
+  &::before
+    content: '\f00c'
+    color: #271
+
+.alert-alert
+  background: #F90
+
+  &::before
+    content: '\f071'
+    color: #A60
+
+.alert-error
+  background: #F42
+
+  &::before
+    content: '\f00d'
+    color: #A21
+
+@media (max-width: 555px)
+  .box-alert
+    width: 100%
+    top: 0
+    left: 0
+    right: 0
+
+.input-group
+  position: relative
+
+#modal-backdrop
+  display: none
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  width: 100%
+  height: 100%
+  background: rgba(0,0,0,0.6)
+  z-index: 1
+  -webkit-backdrop-filter: blur(10px)
+
+#modal-window
+  position: absolute
+  top: 60px
+  left: 50%
+  margin-left: -160px
+  width: 280px
+  padding: 20px
+  background: #FFF
+  border-radius: 4px
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25)
+
+#modal-close
+  position: absolute
+  top: -16px
+  right: -16px
+  cursor: pointer
+  background: $color-fg
+  color: #FFF
+  border: none
+  width: 32px
+  height: 32px
+  line-height: 32px
+  font-size: 1.2em
+  border-radius: 16px
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2)
+
+  &:hover
+    background: $color-bg
+
+[class^="modal-"]
+  padding-left: 50px
+  font-size: 0.9em
+  line-height: 1.2em
+
+  &::before
+    content: '\f071'
+    font-family: "Font Awesome 5 Free"
+    font-weight: 700
+    font-size: 2em
+    float: left
+    margin: 10px 0 0 -50px
+    text-shadow: none
+    color: #F92

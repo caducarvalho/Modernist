@@ -1,13 +1,21 @@
-<h1>Task</h1>
-<p><%= @task.task %></p>
-<p><%= @task.completed_at.nil? ? 'Incomplete' : @task.completed_at.strftime("Completed at %m/%d/%Y %H:%M") %></p>
+<div class="container">
+  <div id="top">
+    <%= icon('fa', @task.icon.name, class: 'task-icon-big') if @task.icon_id != nil %>
+    <%= content_tag(:h1, @task.task, class: 'task-description') %>
+    <%= link_to(icon('fa', 'tag') + @task.category.name, category_path(@task.category), class: 'task-category') %>
+    <%= content_tag(:div, simple_format(@task.details), class: 'task-details') if @task.details != '' && @task.details != nil %>
+  </div>
 
-<%= form_for @task do |t| %>
-  <%= t.hidden_field :task %>
-  <%= t.submit @task.completed_at.nil? ? 'Complete' : 'Uncomplete' %>
-<% end %>
+  <%= form_for(@task, url: { action: :check_complete }, html: { class: @task.completed? ? 'task-completion completed' : 'task-completion incomplete'}) do |t| %>
+    <%= t.hidden_field :task %>
 
-<ul>
-  <li><%= link_to "Back", root_path %></li>
-  <li><%= link_to("Delete", task_path(@task), method: :delete, data: { confirm: 'Are you certain you want to delete this?' }) %></li>
-</ul>
+    <%= t.button @task.completed? ? icon('far', 'check-circle') : icon('far', 'circle'), type: 'submit' %>
+    <%= @task.completed? ? "Completed #{time_ago_in_words(@task.updated_at)} ago" : 'Incomplete' %>
+  <% end %>
+
+  <ul class="further-actions">
+    <li class="back"><%= link_to 'Tasks', root_path %></li>
+    <li class="back"><%= link_to 'Edit', edit_task_path(@task) %></li>
+    <li class="delete"><%= link_to('Delete', task_path(@task), method: :delete, data: { confirm: 'Are you certain you want to delete this?' }) %></li>
+  </ul>
+</div>
