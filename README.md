@@ -1,24 +1,9 @@
-# README
+# Modernist
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Modernist is a web-based task manager, inspired by the swiss graphic design. Modernist allows you to add your to-do list easily and organize your day. You can categorize your tasks, add details and run a Pomodoro session to focus your work and ease your mind.
 
-Things you may want to cover:
+## Specs
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Ruby 2.5.1
+* Rails 5.2
+* jQuery 3.3.1 (using gem jquery-rails)
