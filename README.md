@@ -7,3 +7,5 @@ Modernist is a web-based task manager, inspired by the swiss graphic design. Mod
 * Ruby 2.5.1
 * Rails 5.2
 * jQuery 3.3.1 (using gem jquery-rails)
+
+Check more about Modernist in my [Behance](https://www.behance.net/gallery/66816185/Modenist). (=
